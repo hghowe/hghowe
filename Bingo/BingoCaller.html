@@ -1,0 +1,82 @@
+<html>
+<head>
+<script type="text/javascript" language="javascript">
+	var count = 0;
+	var balls = [];
+	var called = [];
+	
+	var letters = ["B","I","N","G","O"];
+	
+		
+	function shuffle()
+	{
+		for (i=0; i<75 ; i++)
+		{
+			balls.push(letters[Math.floor(i/15)]+"-"+(i+1));
+		}
+		for (i=0; i< 500; i++)
+		{
+			balls.push(balls.splice(Math.floor(Math.random()*75),1));
+		}
+		called = [];
+		refreshRecord();
+		document.getElementById('call').disabled = false;
+		document.getElementById('latest').innerHTML = "<span style='font-size:48'>&nbsp;</span>";
+	}
+	
+	function refreshRecord()
+	{
+		if (called.length == 0)
+		{
+			document.getElementById('record').innerHTML = "";
+			return;	
+		}
+		result = "<table border='1' cellspacing = '0' cellpadding='5'>\n";
+		for ( i=0; i<Math.min(called.length,15); i++)
+		{
+			result += "\t<tr>\n\t\t";
+			for ( j=0; j<Math.floor((called.length-1)/15)+1; j++)
+			{
+				if (j*15+i<called.length)
+					result+="<td width='65'>"+called[j*15+i]+"</td>";
+				else
+					result+="<td>&nbsp;</td>";
+			}
+		
+			result += "\n\t</tr>\n";
+		}
+		result += "</table>"
+		recordDiv = document.getElementById("record");
+		recordDiv.innerHTML = result;
+	}
+	
+	function updateLatest()
+	{
+// 		document.getElementById("latest").innerHTML=count;
+		latestCall = balls[count];
+		document.getElementById("latest").innerHTML="<span style='font-size:48'>"+latestCall+"</span>";
+		called.push(latestCall);
+		refreshRecord();
+		
+		
+		count++;
+		if (count == 75)
+		{
+			document.getElementById('call').disabled = true;
+		}
+	}
+
+</script>
+</head>
+<body onLoad="shuffle();return false;">
+<form>
+	<input id = "call" type="button" value="Call" onClick="updateLatest();return false;" />
+	<input type="button" value="restart" onClick = "shuffle();return false;" />
+</form>
+<hr />
+<div id="latest"></div>
+<hr />
+<div id="record">record</div>
+
+</body>
+</html>

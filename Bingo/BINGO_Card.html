@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>BINGO CARD</title>
+<script language = "javascript" type = "text/javascript">
+function initializeCard()
+	{
+		var columns = [];
+		for ( i=0; i<5; i++)
+		{
+			items = [];
+			for ( j=0; j<15; j++)
+			{
+				items.push(1+15*i+j);
+			}
+			columns.push(items);
+		}
+	
+		for (iteration = 0; iteration < 60; iteration ++)
+		{
+			for (i=0; i<5; i++)
+			{
+				index = Math.floor(Math.random()*15);
+				columns[i].push(columns[i].splice(index,1));
+			}
+		}
+	
+		for (i = 0; i<5; i++)
+		{
+			columns[i].splice(5,10);
+			columns[i].sort(function(a,b){return a-b});
+		}
+	
+		displayCard(columns);
+	
+	}
+	function displayCard(columns)
+	{
+		document.write("<table border = '1' cellpadding = '10' cellspacing = '0'>\n")
+		document.write("<tr><th width = 75 align = 'center'>B</th><th width = 75 align = 'center'>I</th><th width = 75 align = 'center'>N</th><th width = 75 align = 'center'>G</th><th width = 75 align = 'center'>O</th></tr>\n")
+		for ( j=0; j<5; j++)
+		{
+			document.write("\t<tr>\n")
+	
+			for ( i=0; i<5; i++)
+			{
+				if (i==2 && j==2)
+					document.write("\t\t<td align = 'center'><br />FREE<br />&nbsp;</td>\n");
+				else
+					document.write("\t\t<td align = 'center'><br />"+columns[i][j]+"<br />&nbsp;</td>\n");
+			}
+			document.write("<tr />\n");
+	
+		}
+		document.write("</table>\n")
+
+	}
+</script>
+
+<style >
+	td,th {font-size:24px;
+		   border: 2px solid black;}
+
+	table {border: 4px solid black;}
+</style>
+
+</head>
+<body><!-- onLoad = "initializeCard(); return false;"> -->
+
+<script type = "text/javascript">initializeCard();</script>
+
+
+
+
+</body>
+</html>
