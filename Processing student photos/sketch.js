@@ -26,7 +26,7 @@ function preload()
 
 function setup()
 {
-  createCanvas(windowWidth,windowHeight)
+  createCanvas(450,350);
   // put setup code here
   currentStudent = int(random(0,numStudents-1));
 
