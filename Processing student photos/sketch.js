@@ -43,8 +43,11 @@ function draw()
   }
   // do the zoom math
   zoom_factor += zoom_velocity * deltaTime/1000;
-  if (zoom_factor >= zoom_max && zoom_velocity>0)
+  if (zoom_factor > zoom_max && zoom_velocity>0)
+  {
     zoom_velocity *=-1;
+    zoom_factor = zoom_max;
+  }
   if (zoom_factor <= 1.0 && zoom_velocity<0)
   {
     zoom_velocity *=-1;
