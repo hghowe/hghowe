@@ -22,6 +22,7 @@ function drawCurve()
   text("bezierVertex(x[1],y[1],  x[2],y[2],  x[3],y[3]);",10,35);
   text("<-- the code at left is what is making the yellow shape.", 400,15);
   text("Drag the numbered dots around to see what they do!",400,35);
+  text("(Imagine a line from 0 -> 1 and one from 3 ->2)", 400, 55);
   stroke("cyan");
   fill("yellow");
   strokeWeight(5);
